@@ -1,0 +1,68 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Espresso Duplo",
+      "descricao": "dose dupla de café para um sabor mais forte.",
+      "preco": "R$ 10,90",
+      "imagem": "assets/img/Espresso.png",
+      "ingredientes": ["Café espresso", "Água filtrada"]
+    },
+    {
+      "id": 2,
+      "nome": "Cappuccino Cremoso",
+      "descricao": "espresso, leite vaporizado e espuma cremosa com canela.",
+      "preco": "R$ 14,90",
+      "imagem": "assets/img/Cappuccino.png",
+      "ingredientes": ["Café espresso", "Leite vaporizado", "Espuma de leite", "Canela"]
+    },
+    {
+      "id": 3,
+      "nome": "Macchiato Caramelo",
+      "descricao": "espresso marcado com espuma e calda de caramelo.",
+      "preco": "R$ 16,90",
+      "imagem": "assets/img/Macchiato.png",
+      "ingredientes": ["Café espresso", "Espuma de leite", "Calda de caramelo"]
+    },
+    {
+      "id": 4,
+      "nome": "Strawberry Latte",
+      "descricao": "mistura de espresso, leite e chocolate premium.",
+      "preco": "R$ 17,90",
+      "imagem": "assets/img/StrawberryLatte.png",
+      "ingredientes": ["Café espresso", "Leite", "Chocolate premium", "Calda de morango"]
+    },
+    {
+      "id": 5,
+      "nome": "Cinnamon Coffee",
+      "descricao": "café com leite, canela e espuma especial.",
+      "preco": "R$ 16,90",
+      "imagem": "assets/img/Cinnamon.png",
+      "ingredientes": [ "Café", "Leite", "Canela", "Espuma cremosa"]
+    },
+    {
+      "id": 6,
+      "nome": "Iced Latte",
+      "descricao": "espresso gelado com leite e gelo.",
+      "preco": "R$ 15,90",
+      "imagem": "assets/img/IcedLatte.png",
+      "ingredientes": ["Café espresso", "Leite gelado", "Gelo"]
+    },
+    {
+      "id": 7,
+      "nome": "Frappé Cappuccino",
+      "descricao": "bebida cremosa batida com gelo e cappuccino.",
+      "preco": "R$ 19,90",
+      "imagem": "assets/img/Frappe.png",
+      "ingredientes": [ "Cappuccino", "Leite", "Gelo", "Creme"]
+    },
+    {
+      "id": 8,
+      "nome": "Latte Vanilla",
+      "descricao": "café suave com bastante leite e toque de baunilha.",
+      "preco": "R$ 15,90",
+      "imagem": "assets/img/Latte.png",
+      "ingredientes": [ "Café espresso", "Leite", "Baunilha"]
+    }
+  ]
+}
