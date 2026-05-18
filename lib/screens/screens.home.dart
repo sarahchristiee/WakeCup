@@ -234,7 +234,7 @@ class _TelaInicialState extends State<TelaInicial> {
                                   errorBuilder: (_, __, ___) => const Icon(
                                     Icons.local_cafe,
                                     size: 50, 
-                                    color: Colors.grey,
+                                    color: Color.fromARGB(255, 0, 68, 26),
                                   ),
                                 )
                               ),
