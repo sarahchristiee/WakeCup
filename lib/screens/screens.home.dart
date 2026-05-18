@@ -33,8 +33,7 @@ class _TelaInicialState extends State<TelaInicial> {
     super.initState();
     buscarCafes();
   }
-
-  // Abre o formulário tanto para Adicionar quanto para Editar
+  
   Future<void> _abrirFormulario({Map<String, dynamic>? cafe, int? index}) async {
     final resultado = await Navigator.push(
       context,
@@ -46,14 +45,14 @@ class _TelaInicialState extends State<TelaInicial> {
     if (resultado != null) {
       setState(() {
         if (index == null) {
-          // Lógica de Adicionar Novo Item
+
           resultado['id'] = cafes.isEmpty ? 1 : cafes.last['id'] + 1;
           cafes.add(resultado);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Novo produto adicionado com sucesso!")),
           );
         } else {
-          // Lógica de Editar Item Existente
+
           cafes[index] = resultado;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Produto atualizado com sucesso!")),
@@ -111,7 +110,6 @@ class _TelaInicialState extends State<TelaInicial> {
                       children: [
                         SvgPicture.asset("assets/img/logo.svg", height: 38),
                         const SizedBox(width: 8),
-                        // Botão de Adicionar Novo Produto na Nav
                         IconButton(
                           onPressed: () => _abrirFormulario(),
                           icon: const Icon(Icons.add_circle_outline_rounded, color: Color(0xffA8CF45), size: 30),
@@ -154,7 +152,7 @@ class _TelaInicialState extends State<TelaInicial> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
-                    childAspectRatio: 0.68, // Ajustado ligeiramente para acomodar o menu
+                    childAspectRatio: 0.68,
                   ),
                   itemBuilder: (context, index) {
                     final cafe = cafes[index];
@@ -178,7 +176,6 @@ class _TelaInicialState extends State<TelaInicial> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Linha do menu de 3 pontos no topo do card
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
