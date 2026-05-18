@@ -57,7 +57,6 @@ class _TelaProdutoState extends State<TelaProduto> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // COMPONENTE ISOLADO AQUI
             CardProduto(
               cafe: widget.cafe,
               favorito: favorito,
