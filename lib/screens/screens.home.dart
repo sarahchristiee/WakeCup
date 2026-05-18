@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wakecup/screens/screens.editar.dart';
 import 'package:wakecup/screens/screens.produto.dart';
 import 'package:wakecup/services/services.carrinho.dart';
 import 'package:wakecup/services/services.favoritos.dart';
 import 'screens.carrinho.dart';
 import 'screens.favoritos.dart';
+
 
 class TelaInicial extends StatefulWidget {
   const TelaInicial({super.key});
@@ -30,6 +32,35 @@ class _TelaInicialState extends State<TelaInicial> {
   void initState() {
     super.initState();
     buscarCafes();
+  }
+
+  // Abre o formulário tanto para Adicionar quanto para Editar
+  Future<void> _abrirFormulario({Map<String, dynamic>? cafe, int? index}) async {
+    final resultado = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => TelaEditarProduto(cafe: cafe),
+      ),
+    );
+
+    if (resultado != null) {
+      setState(() {
+        if (index == null) {
+          // Lógica de Adicionar Novo Item
+          resultado['id'] = cafes.isEmpty ? 1 : cafes.last['id'] + 1;
+          cafes.add(resultado);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Novo produto adicionado com sucesso!")),
+          );
+        } else {
+          // Lógica de Editar Item Existente
+          cafes[index] = resultado;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Produto atualizado com sucesso!")),
+          );
+        }
+      });
+    }
   }
 
   @override
@@ -76,7 +107,18 @@ class _TelaInicialState extends State<TelaInicial> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset("assets/img/logo.svg", height: 38),
+                    Row(
+                      children: [
+                        SvgPicture.asset("assets/img/logo.svg", height: 38),
+                        const SizedBox(width: 8),
+                        // Botão de Adicionar Novo Produto na Nav
+                        IconButton(
+                          onPressed: () => _abrirFormulario(),
+                          icon: const Icon(Icons.add_circle_outline_rounded, color: Color(0xffA8CF45), size: 30),
+                          tooltip: "Adicionar café",
+                        ),
+                      ],
+                    ),
                     Container(
                       width: 42,
                       height: 42,
@@ -112,7 +154,7 @@ class _TelaInicialState extends State<TelaInicial> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
-                    childAspectRatio: 0.72,
+                    childAspectRatio: 0.68, // Ajustado ligeiramente para acomodar o menu
                   ),
                   itemBuilder: (context, index) {
                     final cafe = cafes[index];
@@ -136,8 +178,66 @@ class _TelaInicialState extends State<TelaInicial> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // Linha do menu de 3 pontos no topo do card
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  height: 24,
+                                  width: 24,
+                                  child: PopupMenuButton<String>(
+                                    padding: EdgeInsets.zero,
+                                    icon: const Icon(Icons.more_vert, color: Colors.black54, size: 20),
+                                    onSelected: (value) {
+                                      if (value == 'editar') {
+                                        _abrirFormulario(cafe: Map<String, dynamic>.from(cafe), index: index);
+                                      } else if (value == 'excluir') {
+                                        setState(() {
+                                          cafes.removeAt(index);
+                                        });
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(content: Text("Produto excluído!")),
+                                        );
+                                      }
+                                    },
+                                    itemBuilder: (BuildContext context) => [
+                                      const PopupMenuItem(
+                                        value: 'editar',
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.edit, size: 18, color: Colors.black54),
+                                            SizedBox(width: 8),
+                                            Text('Editar'),
+                                          ],
+                                        ),
+                                      ),
+                                      const PopupMenuItem(
+                                        value: 'excluir',
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.delete, size: 18, color: Colors.red),
+                                            SizedBox(width: 8),
+                                            Text('Excluir', style: TextStyle(color: Colors.red)),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                             Expanded(
-                              child: Center(child: Image.asset(cafe["imagem"], fit: BoxFit.contain)),
+                              child: Center(
+                                child: Image.asset(
+                                  cafe["imagem"], 
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) => const Icon(
+                                    Icons.local_cafe,
+                                    size: 50, 
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              ),
                             ),
                             const SizedBox(height: 10),
                             Text(
