@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TelaEditarProduto extends StatefulWidget {
-  final Map<String, dynamic>? cafe; // Nulo indica que é uma criação
+  final Map<String, dynamic>? cafe;
 
   const TelaEditarProduto({super.key, this.cafe});
 
@@ -21,13 +21,11 @@ class _TelaEditarProdutoState extends State<TelaEditarProduto> {
   @override
   void initState() {
     super.initState();
-    // Se widget.cafe for nulo, carrega valores padrão para novo produto
     _nomeCtrl = TextEditingController(text: widget.cafe?['nome'] ?? "");
     _descCtrl = TextEditingController(text: widget.cafe?['descricao'] ?? "");
     _precoCtrl = TextEditingController(text: widget.cafe?['preco'] ?? " ");
     _imagemCtrl = TextEditingController(text: widget.cafe?['imagem'] ?? "assets/img/Espresso.png");
 
-    // Converte a List<dynamic> em uma única String separada por vírgula para o input
     List ingredientesLista = widget.cafe?['ingredientes'] ?? [];
     _ingredientesCtrl = TextEditingController(text: ingredientesLista.join(", "));
   }
@@ -92,9 +90,8 @@ class _TelaEditarProdutoState extends State<TelaEditarProduto> {
                           .where((e) => e.isNotEmpty)
                           .toList();
 
-                      // Monta o mapa mapeado com a estrutura exata do JSON
                       final dadosMapeados = {
-                        "id": widget.cafe?['id'], // Mantém se existir
+                        "id": widget.cafe?['id'],
                         "nome": _nomeCtrl.text.trim(),
                         "descricao": _descCtrl.text.trim(),
                         "preco": _precoCtrl.text.trim(),
@@ -102,7 +99,6 @@ class _TelaEditarProdutoState extends State<TelaEditarProduto> {
                         "ingredientes": listaIngredientes,
                       };
 
-                      // Retorna os dados prontos para a TelaInicial
                       Navigator.pop(context, dadosMapeados);
                     }
                   },
