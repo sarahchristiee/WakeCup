@@ -30,6 +30,11 @@ O aplicativo conta com:
 
 ---
 
+## 🎨 Prototipação
+* [Figma](https://www.figma.com/design/TZhIuH89pYGn444HQY1y6R/Wakecup?node-id=0-1&t=ZtlzxLrwK2345cth-1) - Acesse a prototipação desse app pelo figma
+
+---
+
 ## 🛠️ Como Executar o Projeto
 
 Siga os passos abaixo para clonar o repositório e rodar o projeto na sua máquina.
